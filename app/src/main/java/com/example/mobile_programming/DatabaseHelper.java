@@ -99,5 +99,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery("SELECT * FROM " + TABLE_USER, null);
     }
+    public Cursor getAllTransaksi() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT * FROM " + TABLE_TRANSAKSI, null);
+    }
+    public Cursor getAllKategori() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT * FROM " + TABLE_KATEGORI, null);
+    }
+    public Cursor getAllAnggaran() {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT * FROM " + TABLE_ANGGARAN, null);
+    }
 }
 
