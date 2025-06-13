@@ -2,6 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="purple">#9529DF</color>
     <color name="ungu">#9529DF</color>
     <color name="merah">#FF8080</color>
     <color name="hijau">#84F07D</color>
