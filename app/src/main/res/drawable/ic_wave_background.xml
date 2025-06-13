@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="360dp"
+    android:height="200dp"
+    android:viewportWidth="360"
+    android:viewportHeight="200">
+
+    <!-- Latar belakang ungu -->
+    <path
+        android:fillColor="#9529DF"
+        android:pathData="M0,0h360v140
+            c-30,30 -90,-30 -180,-10s-150,50 -180,10v-140z" />
+
+    <!-- Layer dekorasi transparan -->
+    <path
+        android:fillColor="#A442F1"
+        android:pathData="M0,100
+            c60,40 120,-20 180,0s120,60 180,20v80
+            c0,0 -20,0 -30,0
+            s-30,0 -30,0
+            H60
+            c-10,0 -30,0 -30,0s-30,0 -30,0z" />
+</vector>
