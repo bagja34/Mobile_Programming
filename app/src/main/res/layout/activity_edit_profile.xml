@@ -50,27 +50,37 @@
                 android:layout_gravity="center"
                 android:textStyle="bold"
                 android:text="Ganti Foto Profile"/>
+
             <TextView
                 android:id="@+id/tvEditName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Nama Pengguna"
                 android:layout_marginTop="30dp"
-                android:textSize="15dp"/>
+                android:text="Nama Pengguna"
+                android:textSize="15dp"
+                tools:ignore="TextSizeCheck" />
+
             <EditText
                 android:id="@+id/etNama"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:hint="@string/app_name"
+                android:minHeight="48dp" />
+
             <TextView
                 android:id="@+id/tvEditEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Email"
-                android:textSize="14dp"/>
+                android:textSize="14dp"
+                tools:ignore="TextSizeCheck" />
+
             <EditText
                 android:id="@+id/etEmail"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:hint="@string/app_name"
+                android:minHeight="48dp" />
             <Button
                 android:id="@+id/btnEditProfile"
                 android:layout_width="wrap_content"
