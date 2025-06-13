@@ -16,7 +16,7 @@
             android:id="@+id/Pback"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/outline_arrow_left_alt_24"/>
+            android:src="@drawable/baseline_arrow_back_24"/>
         <TextView
             android:id="@+id/tvProfile"
             android:layout_width="310dp"
@@ -82,7 +82,7 @@
                 android:id="@+id/ivAccount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/outline_person_24"/>
+                android:src="@drawable/baseline_person_24"/>
             <TextView
                 android:id="@+id/tvPaccount"
                 android:layout_width="match_parent"
@@ -106,7 +106,7 @@
                 android:id="@+id/ivWallet"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/outline_account_balance_wallet_24"/>
+                android:src="@drawable/baseline_account_balance_wallet_24"/>
             <TextView
                 android:id="@+id/tvPwallet"
                 android:layout_width="match_parent"
@@ -130,7 +130,7 @@
                 android:id="@+id/ivSetting"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/outline_settings_24"/>
+                android:src="@drawable/baseline_settings_24"/>
             <TextView
                 android:id="@+id/tvPsetting"
                 android:layout_width="match_parent"
