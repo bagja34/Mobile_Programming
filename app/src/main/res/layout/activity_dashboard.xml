@@ -26,9 +26,10 @@
         android:layout_marginEnd="56dp"
         android:background="@android:color/transparent"
         android:contentDescription="Notification"
-        android:src="@drawable/baseline_home_filled_24"
+        android:src="@drawable/baseline_notifications_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:tint="#FFFFFF"
         tools:ignore="TouchTargetSizeCheck" />
 
     <!-- Tombol Settings dan ubah icon-nya-->
@@ -40,9 +41,10 @@
         android:layout_marginEnd="16dp"
         android:background="@android:color/transparent"
         android:contentDescription="Settings"
-        android:src="@drawable/baseline_home_filled_24"
+        android:src="@drawable/baseline_more_vert_24"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:tint="#FFFFFF"
         tools:ignore="TouchTargetSizeCheck" />
 
     <!-- Teks Header -->
@@ -156,6 +158,19 @@
         android:layout_marginStart="20dp"
         app:layout_constraintTop_toBottomOf="@+id/balanceCard"
         app:layout_constraintStart_toStartOf="parent" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewTransactions"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintTop_toBottomOf="@id/lastTransactionLabel"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 
     <include
         layout="@layout/bottom_nav"

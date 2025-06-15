@@ -34,7 +34,7 @@
         android:layout_toEndOf="@id/navHome"
         android:layout_marginStart="48dp"
         android:background="@android:color/transparent"
-        android:src="@drawable/baseline_home_filled_24"
+        android:src="@drawable/baseline_history_24"
         app:tint="#B0B0B0"
         android:contentDescription="Search"
         tools:ignore="TouchTargetSizeCheck" />
@@ -46,7 +46,7 @@
         android:layout_height="48dp"
         android:layout_centerInParent="true"
         android:background="@drawable/bg_circle_purple"
-        android:src="@drawable/baseline_home_filled_24"
+        android:src="@drawable/baseline_add_24"
         android:elevation="6dp"
         app:tint="#FFFFFF"
         android:contentDescription="Add new item" />
@@ -60,7 +60,7 @@
         android:layout_toEndOf="@id/navAdd"
         android:layout_marginStart="48dp"
         android:background="@android:color/transparent"
-        android:src="@drawable/baseline_home_filled_24"
+        android:src="@drawable/baseline_account_balance_wallet_24"
         app:tint="#B0B0B0"
         android:contentDescription="Statistics"
         tools:ignore="TouchTargetSizeCheck" />
@@ -74,7 +74,7 @@
         android:layout_centerVertical="true"
         android:layout_marginEnd="24dp"
         android:background="@android:color/transparent"
-        android:src="@drawable/baseline_home_filled_24"
+        android:src="@drawable/baseline_person_24"
         app:tint="#B0B0B0"
         android:contentDescription="Profile"
         tools:ignore="TouchTargetSizeCheck" />
