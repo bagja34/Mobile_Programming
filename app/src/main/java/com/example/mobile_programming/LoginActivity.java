@@ -1,41 +1,46 @@
 package com.example.mobile_programming;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.material.textfield.TextInputEditText;
 
+public class LoginActivity extends AppCompatActivity {
 
-public class LoginActivity extends AppCompatActivity{
     private TextInputEditText etEmail, etPassword;
     private Button btnLogin;
     private TextView tvForgotPassword, tvRegister;
+    private DatabaseHelper dbHelper;
 
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
 
-        // Inisialisasi komponen
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
         btnLogin = findViewById(R.id.btnLogin);
         tvForgotPassword = findViewById(R.id.tvForgotPassword);
         tvRegister = findViewById(R.id.tvRegister);
 
-        // Aksi tombol login
+        dbHelper = new DatabaseHelper(this); // Inisialisasi DatabaseHelper
+
         btnLogin.setOnClickListener(view -> {
             String email = etEmail.getText().toString().trim();
             String password = etPassword.getText().toString().trim();
 
-            if (email.equals("user@example.com") && password.equals("password")) {
+            if (dbHelper.checkUser(email, password)) {
                 Toast.makeText(LoginActivity.this, "Login Berhasil", Toast.LENGTH_SHORT).show();
-                // TODO: Navigasi ke halaman utama
+                Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+                startActivity(intent);
+                finish();
             } else {
                 Toast.makeText(LoginActivity.this, "Email atau Password salah", Toast.LENGTH_SHORT).show();
             }

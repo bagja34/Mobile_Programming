@@ -12,7 +12,8 @@ public class NavActivity extends AppCompatActivity {
     protected void setupBottomNav() {
         ImageButton navHome = findViewById(R.id.navHome);
         ImageButton navAdd = findViewById(R.id.navAdd);
-        ImageButton navStats = findViewById(R.id.navStats);
+        ImageButton navProfile = findViewById(R.id.navProfile);
+        ImageButton navHistory = findViewById(R.id.navHistory);
 
         navHome.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -23,23 +24,23 @@ public class NavActivity extends AppCompatActivity {
             }
         });
 
-//        navAdd.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(NavActivity.this, AddActivity.class);
-//                startActivity(intent);
-//                finish();
-//            }
-//        });
+        navAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(NavActivity.this, AddTransactionActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
-//        navStats.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(NavActivity.this, StatsActivity.class);
-//                startActivity(intent);
-//                finish();
-//            }
-//        });
+        navProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(NavActivity.this, ProfileActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     @Override

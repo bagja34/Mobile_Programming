@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#9529DF">
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,7 +19,7 @@
             android:layout_marginTop="64dp"
             android:src="@drawable/ic_launcher_foreground"
             android:contentDescription="Logo"
-            app:tint="@android:color/white" />
+            app:tint="@color/ungu" />
 
         <!-- Judul -->
         <TextView
@@ -82,7 +82,7 @@
             android:text="Sign In"
             android:textAllCaps="false"
             android:textColor="@android:color/white"
-            android:backgroundTint="#9529DF"
+            app:tint="@color/ungu"
             android:background="@drawable/rounded_button"
             android:layout_marginTop="24dp"
             android:padding="14dp"/>
