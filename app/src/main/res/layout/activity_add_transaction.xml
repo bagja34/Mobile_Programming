@@ -57,13 +57,13 @@
                 android:id="@+id/radioSocial"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Social & Lifestyle" />
+                android:text="Social and Lifestyle" />
 
             <RadioButton
                 android:id="@+id/radioBeauty"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Beauty & Health" />
+                android:text="Beauty and Health" />
 
             <RadioButton
                 android:id="@+id/radioOther"
