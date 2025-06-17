@@ -12,9 +12,9 @@ import java.util.List;
 
 public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.TransactionViewHolder> {
 
-    private final List<String> transactions;
+    private final List<Transaction> transactions;
 
-    public TransactionAdapter(List<String> transactions) {
+    public TransactionAdapter(List<Transaction> transactions) {
         this.transactions = transactions;
     }
 
@@ -22,13 +22,16 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
     @Override
     public TransactionViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(android.R.layout.simple_list_item_1, parent, false);
+                .inflate(R.layout.item_transaction_card, parent, false);
         return new TransactionViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull TransactionViewHolder holder, int position) {
-        holder.textView.setText(transactions.get(position));
+        Transaction transaction = transactions.get(position);
+        holder.txtDescription.setText(transaction.getDescription());
+        holder.txtDate.setText(transaction.getDate());
+        holder.txtAmount.setText("$" + transaction.getAmount());
     }
 
     @Override
@@ -37,11 +40,13 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
     }
 
     static class TransactionViewHolder extends RecyclerView.ViewHolder {
-        TextView textView;
+        TextView txtDescription, txtDate, txtAmount;
 
         public TransactionViewHolder(@NonNull View itemView) {
             super(itemView);
-            textView = itemView.findViewById(android.R.id.text1);
+            txtDescription = itemView.findViewById(R.id.txtDeskripsi);
+            txtDate = itemView.findViewById(R.id.txtTanggal);
+            txtAmount = itemView.findViewById(R.id.txtJumlah);
         }
     }
 }

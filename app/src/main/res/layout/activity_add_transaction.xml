@@ -24,7 +24,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Title :"/>
+            android:text="Title :" />
 
         <EditText
             android:id="@+id/editTitle"
@@ -33,13 +33,14 @@
             android:hint="Donating for hospital medical kit"
             android:background="@drawable/rounded_edittext"
             android:padding="12dp"
-            android:layout_marginBottom="16dp"/>
+            android:layout_marginBottom="16dp"
+            android:textColor="@color/ungu" />
 
         <!-- Category -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Category :"/>
+            android:text="Category :" />
 
         <RadioGroup
             android:id="@+id/radioCategory"
@@ -87,20 +88,21 @@
             android:background="@drawable/rounded_edittext"
             android:padding="12dp"
             android:inputType="numberDecimal"
-            android:layout_marginBottom="16dp"/>
+            android:layout_marginBottom="16dp"
+            android:textColor="@color/ungu"/>
 
         <!-- Type -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Type :"/>
+            android:text="Type :" />
 
         <Spinner
             android:id="@+id/spinnerType"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
-            android:minHeight="48dp" />
+            android:minHeight="48dp"/>
 
         <!-- Save Button -->
         <Button
@@ -108,11 +110,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Save"
-            android:backgroundTint="#A020F0"
             android:textColor="@android:color/white"
+            android:backgroundTint="@color/ungu"
             android:padding="16dp"
             android:textStyle="bold"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/rounded_button"/>
+            android:layout_marginTop="8dp" />
+        <!-- Back Button -->
+        <Button
+            android:id="@+id/buttonBack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Back to Dashboard"
+            android:textColor="@android:color/white"
+            android:backgroundTint="@color/ungu"
+            android:padding="16dp"
+            android:textStyle="bold"
+            android:layout_marginTop="12dp" />
     </LinearLayout>
 </ScrollView>

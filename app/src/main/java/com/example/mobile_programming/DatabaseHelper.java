@@ -1,5 +1,6 @@
 package com.example.mobile_programming;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -122,6 +123,28 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cursor.close();
         return exists;
     }
-
+    public boolean insertTransaksi(int userId, int kategoriId, double jumlah, String deskripsi, String tanggal) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_USER, userId);
+        values.put(COLUMN_KATEGORI_ID, kategoriId);
+        values.put(COLUMN_JUMLAH, jumlah);
+        values.put(COLUMN_DESC, deskripsi);
+        values.put(COLUMN_DATE, tanggal);
+        long result = db.insert(TABLE_TRANSAKSI, null, values);
+        return result != -1;
+    }
+    public int getKategoriIdByName(String namaKategori) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT id FROM kategori WHERE kategori = ?", new String[]{namaKategori});
+        if (cursor.moveToFirst()) {
+            int id = cursor.getInt(0);
+            cursor.close();
+            return id;
+        } else {
+            cursor.close();
+            return -1;
+        }
+    }
 }
 

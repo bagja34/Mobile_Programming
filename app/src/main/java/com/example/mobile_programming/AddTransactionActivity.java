@@ -1,6 +1,8 @@
 package com.example.mobile_programming;
 
 import android.content.ContentValues;
+import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
@@ -50,6 +52,17 @@ public class AddTransactionActivity extends AppCompatActivity {
                 saveTransaction();
             }
         });
+
+        Button buttonBack = findViewById(R.id.buttonBack);
+
+        buttonBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                 Intent intent = new Intent(AddTransactionActivity.this, DashboardActivity.class);
+                 startActivity(intent);
+            }
+        });
+
     }
 
     private void saveTransaction() {
@@ -65,22 +78,42 @@ public class AddTransactionActivity extends AppCompatActivity {
             return;
         }
 
+        // Cari kategori_id dari tabel kategori
+        int kategoriId = getKategoriId(category);
+
+        if (kategoriId == -1) {
+            Toast.makeText(this, "Category not found in database!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        // Insert transaksi
         ContentValues values = new ContentValues();
-
         values.put("user_id", 1);
-
+        values.put("kategori_id", kategoriId);
         values.put("jumlah", Double.parseDouble(amount));
-
         values.put("deskripsi", title);
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
         String currentDate = sdf.format(new Date());
         values.put("tanggal", currentDate);
 
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-        db.insert("transaksi", null, values);
+        long result = db.insert("transaksi", null, values);
 
-        Toast.makeText(this, "Transaction saved!", Toast.LENGTH_SHORT).show();
-        finish();
+        if (result != -1) {
+            Toast.makeText(this, "Transaction saved!", Toast.LENGTH_SHORT).show();
+            finish();
+        } else {
+            Toast.makeText(this, "Failed to save transaction.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private int getKategoriId(String kategoriName) {
+        int id = -1;
+        Cursor cursor = db.rawQuery("SELECT id FROM kategori WHERE kategori = ?", new String[]{kategoriName});
+        if (cursor.moveToFirst()) {
+            id = cursor.getInt(0);
+        }
+        cursor.close();
+        return id;
     }
 }
