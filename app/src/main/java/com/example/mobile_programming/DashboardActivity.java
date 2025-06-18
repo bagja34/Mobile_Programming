@@ -3,6 +3,7 @@ package com.example.mobile_programming;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -10,7 +11,9 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class DashboardActivity extends NavActivity {
 
@@ -26,14 +29,14 @@ public class DashboardActivity extends NavActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
-        // Nav
+        // Bottom Navigation setup
         setupBottomNav();
 
-        // DB
+        // DB setup
         dbHelper = new DatabaseHelper(this);
         db = dbHelper.getReadableDatabase();
 
-        // Views
+        // View initialization
         btnNotification = findViewById(R.id.btnNotification);
         btnSettings = findViewById(R.id.btnSettings);
         txtBalance = findViewById(R.id.txtBalance);
@@ -49,27 +52,27 @@ public class DashboardActivity extends NavActivity {
                 Toast.makeText(this, "Navigasi ke pengaturan (belum dibuat).", Toast.LENGTH_SHORT).show()
         );
 
-        // Load real data
+        // Load actual dashboard data
         loadDashboardData();
     }
 
     private void loadDashboardData() {
         double totalIncome = 0.0;
         double totalExpense = 0.0;
+        double balance;
 
         ArrayList<Transaction> latestTransactions = new ArrayList<>();
 
-        // Query semua transaksi ordered by id DESC → terbaru di atas
         Cursor cursor = db.rawQuery("SELECT * FROM transaksi ORDER BY id DESC", null);
 
         int count = 0;
         if (cursor.moveToFirst()) {
             do {
                 double amount = cursor.getDouble(cursor.getColumnIndexOrThrow("jumlah"));
-
-                // Ambil kategori untuk bedakan income/expense
                 int kategoriId = cursor.getInt(cursor.getColumnIndexOrThrow("kategori_id"));
                 String kategori = getKategoriName(kategoriId);
+
+                Log.d("DB_DEBUG", "Kategori: " + kategori + ", Jumlah: " + amount);
 
                 if (kategori.equalsIgnoreCase("pemasukkan")) {
                     totalIncome += amount;
@@ -77,7 +80,6 @@ public class DashboardActivity extends NavActivity {
                     totalExpense += amount;
                 }
 
-                // Tambahkan ke list terbaru (hanya 3)
                 if (count < 3) {
                     String desc = cursor.getString(cursor.getColumnIndexOrThrow("deskripsi"));
                     String tanggal = cursor.getString(cursor.getColumnIndexOrThrow("tanggal"));
@@ -89,23 +91,27 @@ public class DashboardActivity extends NavActivity {
         }
         cursor.close();
 
-        double balance = totalIncome - totalExpense;
+        balance = totalIncome - totalExpense;
 
-        txtBalance.setText("$" + String.format("%.2f", balance));
-        txtIncome.setText("$" + String.format("%.2f", totalIncome));
-        txtExpense.setText("-$" + String.format("%.2f", totalExpense));
+        // Format to Rupiah
+        NumberFormat formatRupiah = NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
+        txtBalance.setText(formatRupiah.format(balance));
+        txtIncome.setText(formatRupiah.format(totalIncome));
+        txtExpense.setText(formatRupiah.format(totalExpense));
 
+        // RecyclerView setup
         recyclerViewTransactions.setLayoutManager(new LinearLayoutManager(this));
         TransactionAdapter adapter = new TransactionAdapter(latestTransactions);
         recyclerViewTransactions.setAdapter(adapter);
     }
 
-    // Ambil nama kategori dari id
     private String getKategoriName(int kategoriId) {
-        String name = "";
+        String name = "unknown";
         Cursor cursor = db.rawQuery("SELECT kategori FROM kategori WHERE id = ?", new String[]{String.valueOf(kategoriId)});
         if (cursor.moveToFirst()) {
             name = cursor.getString(0);
+        } else {
+            Log.w("DB_WARNING", "Kategori ID " + kategoriId + " tidak ditemukan!");
         }
         cursor.close();
         return name;

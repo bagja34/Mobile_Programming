@@ -36,12 +36,29 @@
             android:padding="12dp"
             android:textColor="@color/ungu" />
 
+        <!-- Input: Title -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Deskripsi :" />
+
+        <EditText
+            android:id="@+id/editDeskripsi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/rounded_edittext"
+            android:hint="Description"
+            android:padding="12dp"
+            android:textColor="@color/ungu" />
+
         <!-- Category -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Category :" />
 
+        <!-- Amount -->
         <RadioGroup
             android:id="@+id/radioCategory"
             android:layout_width="match_parent"
@@ -68,13 +85,18 @@
                 android:text="Beauty and Health" />
 
             <RadioButton
+                android:id="@+id/radioSalary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Gaji" />
+
+            <RadioButton
                 android:id="@+id/radioOther"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Other" />
         </RadioGroup>
 
-        <!-- Amount -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -103,6 +125,7 @@
             android:id="@+id/spinnerType"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/rounded_edittext"
             android:layout_marginBottom="24dp"
             android:minHeight="48dp" />
 

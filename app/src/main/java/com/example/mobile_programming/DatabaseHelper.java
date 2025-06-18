@@ -70,23 +70,35 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(createTableKategori);
         db.execSQL(createTableTransaksi);
         db.execSQL(createTableAnggaran);
-        // Tambahkan data sample
-        db.execSQL("INSERT INTO "+TABLE_USER + "(" +
-                COLUMN_NAMA+","+
-                COLUMN_EMAIL+","+
-                COLUMN_PASSWORD+
-                ")" + " VALUES ('Budi Santoso','budisans@gmail.com','123456')");
-        db.execSQL("INSERT INTO "+TABLE_USER + "(" +
-                COLUMN_NAMA+","+
-                COLUMN_EMAIL+","+
-                COLUMN_PASSWORD+
-                ")" + "  VALUES ('Adi Nugroho','adinugroho@gmail.com','123456')");
-        db.execSQL("INSERT INTO "+TABLE_USER + "(" +
-                COLUMN_NAMA+","+
-                COLUMN_EMAIL+","+
-                COLUMN_PASSWORD+
-                ")" + " VALUES ('Siti Rahmawati','sitiramawati@gmail.com','123456')");
+
+        // Data sample user
+        db.execSQL("INSERT INTO "+TABLE_USER+" ("+COLUMN_NAMA+","+COLUMN_EMAIL+","+COLUMN_PASSWORD+") VALUES ('Budi Santoso','budisans@gmail.com','123456')");
+        db.execSQL("INSERT INTO "+TABLE_USER+" ("+COLUMN_NAMA+","+COLUMN_EMAIL+","+COLUMN_PASSWORD+") VALUES ('Adi Nugroho','adinugroho@gmail.com','123456')");
+        db.execSQL("INSERT INTO "+TABLE_USER+" ("+COLUMN_NAMA+","+COLUMN_EMAIL+","+COLUMN_PASSWORD+") VALUES ('Siti Rahmawati','sitiramawati@gmail.com','123456')");
+
+        // Insert default kategori
+        db.execSQL("INSERT INTO " + TABLE_KATEGORI + " (" +
+                COLUMN_USER + ", " + COLUMN_KATEGORI + ", " + COLUMN_TYPE +
+                ") VALUES (1, 'Entertainment', 'pengeluaran')");
+
+        db.execSQL("INSERT INTO " + TABLE_KATEGORI + " (" +
+                COLUMN_USER + ", " + COLUMN_KATEGORI + ", " + COLUMN_TYPE +
+                ") VALUES (1, 'Social and Lifestyle', 'pengeluaran')");
+
+        db.execSQL("INSERT INTO " + TABLE_KATEGORI + " (" +
+                COLUMN_USER + ", " + COLUMN_KATEGORI + ", " + COLUMN_TYPE +
+                ") VALUES (1, 'Beauty and Health', 'pengeluaran')");
+
+        db.execSQL("INSERT INTO " + TABLE_KATEGORI + " (" +
+                COLUMN_USER + ", " + COLUMN_KATEGORI + ", " + COLUMN_TYPE +
+                ") VALUES (1, 'Gaji', 'pemasukkan')");
+
+        db.execSQL("INSERT INTO " + TABLE_KATEGORI + " (" +
+                COLUMN_USER + ", " + COLUMN_KATEGORI + ", " + COLUMN_TYPE +
+                ") VALUES (1, 'Other', 'pengeluaran')");
+
     }
+
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int
             newVersion) {
