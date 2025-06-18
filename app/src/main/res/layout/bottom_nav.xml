@@ -25,9 +25,9 @@
         android:contentDescription="Home"
         tools:ignore="TouchTargetSizeCheck" />
 
-    <!-- New Icon (TAMBAHAN) -->
+    <!-- History  -->
     <ImageButton
-        android:id="@+id/navSearch"
+        android:id="@+id/navHistory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
@@ -53,7 +53,7 @@
 
     <!-- Stats Icon -->
     <ImageButton
-        android:id="@+id/navHistory"
+        android:id="@+id/navWallet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"

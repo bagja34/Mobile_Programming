@@ -41,6 +41,15 @@ public class NavActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        navHistory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(NavActivity.this, HistoryActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     @Override

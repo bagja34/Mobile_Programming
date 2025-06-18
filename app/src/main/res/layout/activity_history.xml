@@ -1,110 +1,122 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <RelativeLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/history"
-        tools:context=".HistoryActivity"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="24dp"
-    >
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/history"
+    tools:context=".HistoryActivity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="24dp">
+
+    <!-- Kartu Ringkasan Saldo -->
     <androidx.cardview.widget.CardView
-        android:layout_height="wrap_content"
+        android:id="@+id/sumCard"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="20dp"
         app:cardCornerRadius="20dp"
-        app:cardBackgroundColor="@color/ungu"
-        android:id="@+id/sumCard">
+        app:cardBackgroundColor="@color/ungu">
+
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
+
+            <!-- Total Uang -->
             <TableLayout
+                android:id="@+id/totaluang"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:shrinkColumns="0"
-                android:stretchColumns="1"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginVertical="25dp"
-                android:id="@+id/totaluang"
-                >
+                android:shrinkColumns="0"
+                android:stretchColumns="1">
                 <TableRow>
                     <ImageView
-                        android:src="@drawable/white_wallet_30"
                         android:layout_gravity="center_vertical"
-                        android:paddingStart="5dp"/>
+                        android:paddingStart="5dp"
+                        android:src="@drawable/white_wallet_30" />
                     <TextView
                         android:text="Rp 1.000.000,00"
                         android:textSize="27dp"
                         android:layout_gravity="center_vertical"
                         android:paddingStart="10dp"
-                        android:textColor="@color/white"
-                        />
+                        android:textColor="@color/white" />
                 </TableRow>
             </TableLayout>
+
+            <!-- Uang Keluar / Masuk -->
             <TableLayout
+                android:layout_below="@id/totaluang"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:shrinkColumns="0,1,3,4"
-                android:stretchColumns="2"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginVertical="25dp"
-                android:layout_below="@id/totaluang">
-                <TableRow
-                    >
+                android:shrinkColumns="0,1,3,4"
+                android:stretchColumns="2">
+                <TableRow>
                     <ImageView
                         android:src="@drawable/white_arrow_outward_28"
-                        android:rotation="0"/>
-
+                        android:rotation="0" />
                     <TextView
-                        android:layout_gravity="center_vertical"
                         android:id="@+id/alamak"
                         android:text="Rp 1.000.000,00"
                         android:textColor="@color/merah"
                         android:textSize="15dp"
                         android:textStyle="bold"
-                        tools:ignore="TextSizeCheck" />
+                        android:layout_gravity="center_vertical" />
                     <TextView
-                        android:layout_gravity="center_vertical"/>
+                        android:layout_gravity="center_vertical" />
                     <ImageView
                         android:src="@drawable/white_arrow_outward_28"
-                        android:rotation="180"/>
-
+                        android:rotation="180" />
                     <TextView
-                        android:layout_gravity="center_vertical"
-                        android:paddingEnd="3dp"
                         android:text="Rp 1.000.000,00"
                         android:textColor="@color/hijau"
                         android:textSize="15dp"
                         android:textStyle="bold"
-                        tools:ignore="TextSizeCheck" />
+                        android:paddingEnd="3dp"
+                        android:layout_gravity="center_vertical" />
                 </TableRow>
             </TableLayout>
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 
+    <!-- Daftar Riwayat -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/sumCard">
+        android:layout_below="@id/sumCard"
+        android:layout_above="@id/bottomNavBar">
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:background="@color/def">
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerView"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:padding="16dp" />
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:paddingBottom="100dp" /> <!-- Tambahan agar tidak ketutup navbar -->
+
             </LinearLayout>
         </androidx.cardview.widget.CardView>
-
     </ScrollView>
-</RelativeLayout>
 
+    <!-- Bottom Navigation -->
+    <include
+        android:id="@+id/bottomNavBar"
+        layout="@layout/bottom_nav"
+        android:layout_width="360dp"
+        android:layout_height="65dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+</RelativeLayout>
