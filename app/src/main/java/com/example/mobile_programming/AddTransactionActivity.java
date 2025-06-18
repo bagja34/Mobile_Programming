@@ -101,10 +101,15 @@ public class AddTransactionActivity extends AppCompatActivity {
 
         if (result != -1) {
             Toast.makeText(this, "Transaction saved!", Toast.LENGTH_SHORT).show();
+
+            Intent intent = new Intent(AddTransactionActivity.this, DashboardActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
             finish();
         } else {
             Toast.makeText(this, "Failed to save transaction.", Toast.LENGTH_SHORT).show();
         }
+
     }
 
     private int getKategoriId(String kategoriName) {

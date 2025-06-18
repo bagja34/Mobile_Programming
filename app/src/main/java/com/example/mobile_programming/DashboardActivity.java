@@ -3,7 +3,6 @@ package com.example.mobile_programming;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -11,14 +10,12 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Locale;
 
 public class DashboardActivity extends NavActivity {
 
     private ImageButton btnNotification, btnSettings;
-    private TextView txtBalance, txtIncome, txtExpense;
+    private TextView txtBalance, txtIncome, txtExpense, welcomeText;
     private RecyclerView recyclerViewTransactions;
 
     DatabaseHelper dbHelper;
@@ -29,20 +26,25 @@ public class DashboardActivity extends NavActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
 
-        // Bottom Navigation setup
+        // Nav
         setupBottomNav();
 
-        // DB setup
+        // DB
         dbHelper = new DatabaseHelper(this);
         db = dbHelper.getReadableDatabase();
 
-        // View initialization
+        // Views
         btnNotification = findViewById(R.id.btnNotification);
         btnSettings = findViewById(R.id.btnSettings);
         txtBalance = findViewById(R.id.txtBalance);
         txtIncome = findViewById(R.id.txtIncome);
         txtExpense = findViewById(R.id.txtExpense);
+        welcomeText = findViewById(R.id.welcomeText);
         recyclerViewTransactions = findViewById(R.id.recyclerViewTransactions);
+
+        // Set welcome text dari database
+        String userName = getUserName(); // ← Panggil fungsi ini
+        welcomeText.setText("Welcome Back, " + userName);
 
         btnNotification.setOnClickListener(v ->
                 Toast.makeText(this, "Belum ada notifikasi baru.", Toast.LENGTH_SHORT).show()
@@ -52,27 +54,27 @@ public class DashboardActivity extends NavActivity {
                 Toast.makeText(this, "Navigasi ke pengaturan (belum dibuat).", Toast.LENGTH_SHORT).show()
         );
 
-        // Load actual dashboard data
+        // Load real data
         loadDashboardData();
     }
 
     private void loadDashboardData() {
         double totalIncome = 0.0;
         double totalExpense = 0.0;
-        double balance;
 
         ArrayList<Transaction> latestTransactions = new ArrayList<>();
 
+        // Query semua transaksi ordered by id DESC → terbaru di atas
         Cursor cursor = db.rawQuery("SELECT * FROM transaksi ORDER BY id DESC", null);
 
         int count = 0;
         if (cursor.moveToFirst()) {
             do {
                 double amount = cursor.getDouble(cursor.getColumnIndexOrThrow("jumlah"));
+
+                // Ambil kategori untuk bedakan income/expense
                 int kategoriId = cursor.getInt(cursor.getColumnIndexOrThrow("kategori_id"));
                 String kategori = getKategoriName(kategoriId);
-
-                Log.d("DB_DEBUG", "Kategori: " + kategori + ", Jumlah: " + amount);
 
                 if (kategori.equalsIgnoreCase("pemasukkan")) {
                     totalIncome += amount;
@@ -80,6 +82,7 @@ public class DashboardActivity extends NavActivity {
                     totalExpense += amount;
                 }
 
+                // Tambahkan ke list terbaru (hanya 3)
                 if (count < 3) {
                     String desc = cursor.getString(cursor.getColumnIndexOrThrow("deskripsi"));
                     String tanggal = cursor.getString(cursor.getColumnIndexOrThrow("tanggal"));
@@ -91,29 +94,36 @@ public class DashboardActivity extends NavActivity {
         }
         cursor.close();
 
-        balance = totalIncome - totalExpense;
+        double balance = totalIncome - totalExpense;
 
-        // Format to Rupiah
-        NumberFormat formatRupiah = NumberFormat.getCurrencyInstance(new Locale("id", "ID"));
-        txtBalance.setText(formatRupiah.format(balance));
-        txtIncome.setText(formatRupiah.format(totalIncome));
-        txtExpense.setText(formatRupiah.format(totalExpense));
+        txtBalance.setText("$" + String.format("%.2f", balance));
+        txtIncome.setText("$" + String.format("%.2f", totalIncome));
+        txtExpense.setText("-$" + String.format("%.2f", totalExpense));
 
-        // RecyclerView setup
         recyclerViewTransactions.setLayoutManager(new LinearLayoutManager(this));
         TransactionAdapter adapter = new TransactionAdapter(latestTransactions);
         recyclerViewTransactions.setAdapter(adapter);
     }
 
+    // Ambil nama kategori dari id
     private String getKategoriName(int kategoriId) {
-        String name = "unknown";
+        String name = "";
         Cursor cursor = db.rawQuery("SELECT kategori FROM kategori WHERE id = ?", new String[]{String.valueOf(kategoriId)});
         if (cursor.moveToFirst()) {
             name = cursor.getString(0);
-        } else {
-            Log.w("DB_WARNING", "Kategori ID " + kategoriId + " tidak ditemukan!");
         }
         cursor.close();
         return name;
+    }
+
+    // Ambil nama user dari database
+    private String getUserName() {
+        String nama = "Pengguna"; // default fallback
+        Cursor cursor = db.rawQuery("SELECT nama FROM user LIMIT 1", null);
+        if (cursor.moveToFirst()) {
+            nama = cursor.getString(0);
+        }
+        cursor.close();
+        return nama;
     }
 }
