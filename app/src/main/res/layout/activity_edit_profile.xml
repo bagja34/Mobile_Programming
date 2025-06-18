@@ -2,10 +2,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
+    android:id="@+id/EditProfile"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layout_marginTop="30dp"
     tools:context=".EditProfileActivity">
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,7 +19,7 @@
             android:layout_height="30dp"
             android:src="@drawable/baseline_arrow_back_24"/>
         <TextView
-            android:id="@+id/EditProfile"
+            android:id="@+id/tvEditProfile"
             android:layout_width="310dp"
             android:layout_height="wrap_content"
             android:text="Edit Profile"
@@ -43,13 +44,16 @@
                 android:src="@drawable/baseline_account_circle_24"
                 android:layout_gravity="center"
                 android:contentDescription="Photo Profile"/>
-            <TextView
+            <Button
                 android:id="@+id/btnEditPP"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="0dp"
                 android:layout_gravity="center"
+                android:backgroundTint="@color/white"
                 android:textStyle="bold"
-                android:text="Ganti Foto Profile"/>
+                android:textColor="@color/black"
+                android:text="Ganti Foto Profil"/>
 
             <TextView
                 android:id="@+id/tvEditName"

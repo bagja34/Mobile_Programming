@@ -1,9 +1,11 @@
 package com.example.mobile_programming;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.net.Uri;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "money_managemeny.db";
@@ -18,6 +20,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_EMAIL = "email";
     private static final String COLUMN_PASSWORD = "pass";
     private static final String COLUMN_CREATED_AT = "created";
+    private static final String COLUMN_URI = "path";
     private static final String COLUMN_USER = "user_id";
     private static final String COLUMN_TYPE = "type";
     private static final String COLUMN_KATEGORI = "kategori";
@@ -37,6 +40,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 COLUMN_NAMA + " VARCHAR(100) NOT NULL, " +
                 COLUMN_EMAIL + " VARCHAR(100) UNIQUE NOT NULL, "+
                 COLUMN_PASSWORD + " TEXT NOT NULL, " +
+                COLUMN_URI + " TEXT, " +
                 COLUMN_CREATED_AT + " TIMESTAMP DEFAULT CURRENT_TIMESTAMP" +
                 ")";
         String createTableKategori = "CREATE TABLE " + TABLE_KATEGORI + " (" +
@@ -95,9 +99,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_ANGGARAN);
         onCreate(db);
     }
+    public void updateUser( int id, String nama, String email, String uri) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_NAMA, nama);
+        values.put(COLUMN_EMAIL, email);
+        values.put(COLUMN_URI, uri);
+        db.update(TABLE_USER, values, COLUMN_ID + "=?", new String[]{String.valueOf(id)});
+        db.close();
+    }
+
     public Cursor getAllUser() {
         SQLiteDatabase db = this.getReadableDatabase();
         return db.rawQuery("SELECT * FROM " + TABLE_USER, null);
+    }
+    public Cursor getUserByID(Integer ID) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        return db.rawQuery("SELECT * FROM " + TABLE_USER + " WHERE " + COLUMN_ID+" = ?", new String[]{String.valueOf(ID)});
     }
     public Cursor getAllTransaksi() {
         SQLiteDatabase db = this.getReadableDatabase();
