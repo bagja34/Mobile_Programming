@@ -3,8 +3,10 @@ package com.example.mobile_programming;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "money_managemeny.db";
@@ -30,6 +32,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_YEAR = "tahun";
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    }
+    @Override
+    public void onConfigure(SQLiteDatabase db) {
+        super.onConfigure(db);
+        db.setForeignKeyConstraintsEnabled(true);  // Wajib
     }
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -96,6 +103,33 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO " + TABLE_KATEGORI + " (" +
                 COLUMN_USER + ", " + COLUMN_KATEGORI + ", " + COLUMN_TYPE +
                 ") VALUES (1, 'Other', 'pengeluaran')");
+        db.execSQL("INSERT INTO kategori (user_id, kategori, type) " +
+                "VALUES (1, 'Grocery', 'pengeluaran')");
+        db.execSQL("INSERT INTO " + TABLE_TRANSAKSI + " (" +
+                COLUMN_USER + ", " + COLUMN_KATEGORI_ID + ", " + COLUMN_JUMLAH + ", " + COLUMN_DESC + ", " +COLUMN_DATE +
+                ") VALUES (1, 1, 100000, 'Beli headset','2025-06-18')");
+        db.execSQL("INSERT INTO " + TABLE_TRANSAKSI + " (" +
+                COLUMN_USER + ", " + COLUMN_KATEGORI_ID + ", " + COLUMN_JUMLAH + ", " + COLUMN_DESC + ", " +COLUMN_DATE +
+                ") VALUES (1, 1, 100000, 'Beli headset','2025-06-18')");
+        db.execSQL("INSERT INTO " + TABLE_TRANSAKSI + " (" +
+                COLUMN_USER + ", " + COLUMN_KATEGORI_ID + ", " + COLUMN_JUMLAH + ", " + COLUMN_DESC + ", " +COLUMN_DATE +
+                ") VALUES (1, 1, 100000, 'Beli headset','2025-06-18')");
+        db.execSQL("INSERT INTO " + TABLE_TRANSAKSI + " (" +
+                COLUMN_USER + ", " + COLUMN_KATEGORI_ID + ", " + COLUMN_JUMLAH + ", " + COLUMN_DESC + ", " +COLUMN_DATE +
+                ") VALUES (1, 1, 100000, 'Beli headset','2025-06-18')");
+        db.execSQL("INSERT INTO " + TABLE_TRANSAKSI + " (" +
+                COLUMN_USER + ", " + COLUMN_KATEGORI_ID + ", " + COLUMN_JUMLAH + ", " + COLUMN_DESC + ", " +COLUMN_DATE +
+                ") VALUES (1, 1, 100000, 'Beli headset','2025-06-18')");
+        db.execSQL("INSERT INTO " + TABLE_TRANSAKSI + " (" +
+                COLUMN_USER + ", " + COLUMN_KATEGORI_ID + ", " + COLUMN_JUMLAH + ", " + COLUMN_DESC + ", " +COLUMN_DATE +
+                ") VALUES (1, 1, 100000, 'Beli headset','2025-06-18')");
+        db.execSQL("INSERT INTO " + TABLE_TRANSAKSI + " (" +
+                COLUMN_USER + ", " + COLUMN_KATEGORI_ID + ", " + COLUMN_JUMLAH + ", " + COLUMN_DESC + ", " +COLUMN_DATE +
+                ") VALUES (1, 1, 100000, 'Beli headset','2025-06-18')");
+        db.execSQL("INSERT INTO " + TABLE_TRANSAKSI + " (" +
+                COLUMN_USER + ", " + COLUMN_KATEGORI_ID + ", " + COLUMN_JUMLAH + ", " + COLUMN_DESC + ", " +COLUMN_DATE +
+                ") VALUES (1, 1, 100000, 'Beli headset','2025-06-18')");
+
 
     }
 

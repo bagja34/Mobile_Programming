@@ -3,6 +3,8 @@ package com.example.mobile_programming;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +14,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.Console;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +37,9 @@ public class HistoryActivity extends AppCompatActivity {
     private void loadTransaksi(){
         listTransaction = new ArrayList<>();
         Cursor cursor = databaseHelper.getAllTransaksi();
+        String yak;
         if (cursor.moveToFirst()) {
+            yak = cursor.getString(3);
             do {
                 listTransaction.add(new Transaction(
                         cursor.getString(4),

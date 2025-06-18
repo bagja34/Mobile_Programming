@@ -40,10 +40,10 @@ public class TransactionAdapterHistory extends RecyclerView.Adapter<TransactionA
                 context.startActivity(i);
             }
         });
-        holder.category.setText(transaksi.getCategory());
-        holder.date.setText(transaksi.getDate());
-        holder.amount.setText(Double.toHexString(transaksi.getAmount()));
-        holder.desc.setText(transaksi.getDescription());
+        holder.category.setText("Kategori : " + transaksi.getCategory());
+        holder.date.setText("Tanggal : "+transaksi.getDate());
+        holder.amount.setText("Jumlah : " + transaksi.getAmount());
+        holder.desc.setText("Deskripsi : "+transaksi.getDescription());
     }
 
     @Override

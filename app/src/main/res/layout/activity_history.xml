@@ -58,6 +58,7 @@
 
                     <TextView
                         android:layout_gravity="center_vertical"
+                        android:id="@+id/alamak"
                         android:text="Rp 1.000.000,00"
                         android:textColor="@color/merah"
                         android:textSize="15dp"
